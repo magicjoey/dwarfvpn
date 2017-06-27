@@ -12,43 +12,15 @@ import {
     View
 } from 'react-native';
 import Root from './src/Root';
+import {TeaNavigator} from 'teaset';
+import TeasetExampleHome from './src/views/Home'
 
-// export default class DwarfVpn extends Component {
-//   render() {
-//     return (
-//       <View style={styles.container}>
-//         <Text style={styles.welcome}>
-//           Welcome to React Native!
-//         </Text>
-//         <Text style={styles.instructions}>
-//           To get started, edit index.ios.js
-//         </Text>
-//         <Text style={styles.instructions}>
-//           Press Cmd+R to reload,{'\n'}
-//           Cmd+D or shake for dev menu
-//         </Text>
-//       </View>
-//     );
-//   }
-// }
-//
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     backgroundColor: '#F5FCFF',
-//   },
-//   welcome: {
-//     fontSize: 20,
-//     textAlign: 'center',
-//     margin: 10,
-//   },
-//   instructions: {
-//     textAlign: 'center',
-//     color: '#333333',
-//     marginBottom: 5,
-//   },
-// });
+export default class MetaDemo extends Component{
+    render(){
+        return <TeaNavigator rootView={<TeasetExampleHome />} />;
+    }
+}
 
-AppRegistry.registerComponent('DwarfVpn', () => Root);
+AppRegistry.registerComponent('DwarfVpn', () => MetaDemo);
+
+// AppRegistry.registerComponent('DwarfVpn', () => Root);

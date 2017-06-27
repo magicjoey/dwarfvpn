@@ -22,22 +22,16 @@ export default class App extends React.Component {
     render() {
 
         return (
-            <View style={{ flex: 1 }}>
+            <View style={{flex: 1}}>
                 <StatusBarIOS barStyle="default"/>
 
                 <NavigatorIOS
-                    initialRoute={{ name: 'Splash', component: Splash }}
+                    initialRoute={{title: Splash, name: 'Splash', component: Splash}}
 
-                    // configureScene={(route) => {
-                    //     if (route.sceneConfig) {
-                    //         return route.sceneConfig;
-                    //     }
-                    //     return NavigatorIOS.SceneConfigs.FloatFromRight;
-                    // } }
                     renderScene={(route, navigator) => {
                         let Component = route.component;
                         return (
-                            <Component navigator = {navigator} route = {route} {...route.passProps} />
+                            <Component navigator={navigator} route={route} {...route.passProps} />
                         )
                     } }
                 />
