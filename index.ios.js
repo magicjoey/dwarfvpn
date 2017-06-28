@@ -13,11 +13,13 @@ import {
 } from 'react-native';
 import Root from './src/Root';
 import {TeaNavigator} from 'teaset';
-import TeasetExampleHome from './src/views/Home'
+import TeasetExampleHome from './src/views/Home';
+
+import Login  from './src/views/Login';
 
 export default class MetaDemo extends Component{
     render(){
-        return <TeaNavigator rootView={<TeasetExampleHome />} />;
+        return <TeaNavigator rootView={<Login />} />;
     }
 }
 
