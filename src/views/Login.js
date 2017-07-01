@@ -23,10 +23,9 @@ import{
 import {NavigationPage, ListRow, Button, Toast, Input, Label} from 'teaset';
 import Register from "./Register";
 import {NativeModules} from 'react-native';
+import {performLoginAction} from "../action/PerformLoginAction";
 var EncryptionModule = NativeModules.EncryptionModule;
 
-var username = '';
-var password = '';
 
 export default class Login extends NavigationPage {
 
@@ -38,6 +37,10 @@ export default class Login extends NavigationPage {
 
     constructor(props) {
         super(props);
+        Object.assign(this.state, {
+            "username": "请输入用户名",
+            "password": "请输入密码",
+        });
         this.doLoginAction = this.doLoginAction.bind(this);
         this.toRegisterAction = this.toRegisterAction.bind(this);
     }
@@ -46,19 +49,21 @@ export default class Login extends NavigationPage {
     doLoginAction() {
         const {navigator, dispatch} = this.props;
         //用户登录
-        if (username === '') {
+        if (this.state.username === '') {
             Toast.message('用户名不能为空...');
             return;
         }
-        if (password === '') {
+        if (this.state.password === '') {
             Toast.message('密码不能为空...')
             return;
         }
-        EncryptionModule.MD5ByCallBack(password, (msg) => {
-            dispatch(performLoginAction(username, msg));
-        }, (error) => {
-            Toast.message('系统异常...');
-        });
+
+        dispatch(performLoginAction(this.state.username, this.state.password));
+        // EncryptionModule.MD5ByCallBack(password, (msg) => {
+        //     dispatch(performLoginAction(username, msg));
+        // }, (error) => {
+        //     Toast.message('系统异常...');
+        // });
     }
 
     toRegisterAction() {
@@ -74,17 +79,15 @@ export default class Login extends NavigationPage {
         return (
             <ScrollView style={{flex: 1}}>
                 <View style={{height: 20}}/>
-                <ListRow title='用户名' detail={<Input style={{width: 200}} size='md' value="请输入用户名"
-                                                    onChangeText={text => this.setState({valueMD: text})}/>}/>
-                <ListRow title='密码' detail={<Input style={{width: 200}} size='md' value="请输入密码"
-                                                   onChangeText={text => this.setState({valueMD: text})}/>}/>
+                <ListRow title='用户名' detail={<Input style={{width: 200}} size='md' value={this.state.username}
+                                                    onChangeText={text => this.setState({username: text})}/>}/>
+                <ListRow title='密码' detail={<Input style={{width: 200}} size='md' value={this.state.password}
+                                                   onChangeText={text => this.setState({password: text})}/>}/>
                 <View style={{height: 20}}/>
-                /** 点击登陆操作  */
                 <Button title='登陆' type='primary' onPress={() => {
                     this.doLoginAction()
                 }} disabled={false}/>
                 <View style={{height: 5}}/>
-                /** 点击跳转注册页面 */
                 <Button title='注册' type='secondary' onPress={() => {
                     this.toRegisterAction()
                 }} disabled={false}/>

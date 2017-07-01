@@ -9,9 +9,10 @@
 'use strict';
 
 import FetchHttpClient, { form,header } from 'fetch-http-client';
-import {HOST,LOGIN_ACTION} from  '../common/Request';
+import {api_url} from  '../common/constants';
 import {NavigationPage, ListRow, Button, Toast, Input, Label} from 'teaset';
-const client = new FetchHttpClient(HOST);
+import * as ActionType from "./ActionType";
+const client = new FetchHttpClient(api_url + "login");
 
 export function performLoginAction(username,password){
     return dispatch => {
@@ -43,13 +44,13 @@ export function performLoginAction(username,password){
 
 function performLogin() {
     return {
-        type: ActionTypes.PERFORM_LOGIN_ACTION,
+        type: ActionType.LOGIN_ACTION,
     }
 }
 
 function receiveLoginResult(result){
     return {
-        type: ActionTypes.RECEIVE_LOGIN_ACTION,
+        type: ActionType.LOGIN_RESULT_ACTION,
         data: result
     }
 
